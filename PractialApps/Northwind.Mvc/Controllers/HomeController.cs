@@ -25,6 +25,44 @@ public class HomeController : Controller
     }
 
 
+
+
+
+
+    [ResponseCache(Duration = 10/*seconds*/,
+        Location = ResponseCacheLocation.Any)]
+    public async Task<IActionResult> Index()
+    {
+        //this is a record type variable
+        HomeIndexViewModel model = new
+        (
+            VisitorCount: Random.Shared.Next(1, 1001),
+            Categories: await db.Categories.ToListAsync(),
+            Products: await db.Products.ToListAsync()
+        );
+
+        try
+        {
+            HttpClient client = clientFactory.CreateClient(
+            name: "Minimal.WebApi");
+            HttpRequestMessage request = new(
+            method: HttpMethod.Get, requestUri: "weatherforecast");
+            HttpResponseMessage response = await client.SendAsync(request);
+            ViewData["weather"] = await response.Content
+            .ReadFromJsonAsync<WeatherForecast[]>();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning($"The Minimal.WebApi service is not responding. Exception:{ex.Message}");
+            ViewData["weather"] = Enumerable.Empty<WeatherForecast>().ToArray();
+        }
+
+        return View(model);
+    }
+
+
+
+
     //calling the Northwind.WebApi API to get a list of customers by country or general.
     public async Task<IActionResult> Customers(string country)
     {
@@ -76,36 +114,7 @@ public class HomeController : Controller
     }
 
 
-    [ResponseCache(Duration =10/*seconds*/,
-        Location= ResponseCacheLocation.Any)]
-    public async Task<IActionResult> Index()
-    {
-        //this is a record type variable
-        HomeIndexViewModel model = new
-        (
-            VisitorCount: Random.Shared.Next(1, 1001),
-            Categories: await db.Categories.ToListAsync(),
-            Products: await db.Products.ToListAsync()
-        );
-
-        try
-        {
-            HttpClient client = clientFactory.CreateClient(
-            name: "Minimal.WebApi");
-            HttpRequestMessage request = new(
-            method: HttpMethod.Get, requestUri: "weatherforecast");
-            HttpResponseMessage response = await client.SendAsync(request);
-            ViewData["weather"] = await response.Content
-            .ReadFromJsonAsync<WeatherForecast[]>();
-        }
-        catch (Exception ex)
-        {
-            _logger.LogWarning($"The Minimal.WebApi service is not responding. Exception:{ ex.Message}");
-            ViewData["weather"] = Enumerable.Empty<WeatherForecast>().ToArray();
-        }
-
-        return View(model);
-    }
+    
 
     [Route("private")]
     [Authorize(Roles = "Administrators")]

@@ -16,11 +16,13 @@ public class ProductsController : Controller
         clientFactory = httpClientFactory;
     }
 
-    [HttpGet]
     public async Task<IActionResult> Index()
     {
         ViewData["Title"] = "Controller: Product Method: Index";
-        await Out.WriteLineAsync("Products - index");
+
+        Console.ForegroundColor = ConsoleColor.Red;
+        await Out.WriteLineAsync(">>>>>>>>>>>>>>>>>>>>>>>>>>   Products - index");
+        Console.ResetColor();
 
         #region temp
         //string uri = "/product";

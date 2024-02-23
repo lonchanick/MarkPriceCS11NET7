@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Northwind.Razor.Employees")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e948a218ac14a7bcc4737166bcbe1f7373f7da89")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+80275a836029702c62e3d1131e1fcaff7279cd51")]
 [assembly: System.Reflection.AssemblyProductAttribute("Northwind.Razor.Employees")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Northwind.Razor.Employees")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
