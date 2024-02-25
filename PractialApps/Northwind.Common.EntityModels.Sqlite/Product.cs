@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 
 namespace Packt.Shared;
@@ -46,13 +47,17 @@ public partial class Product
     [Column(TypeName = "bit")]
     public bool Discontinued { get; set; }
 
+    [JsonIgnore]//added by me
     [ForeignKey("CategoryId")]
     [InverseProperty("Products")]
     public virtual Category? Category { get; set; }
-
+    
+    
+    [JsonIgnore]//added by me
     [InverseProperty("Product")]
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 
+    [JsonIgnore]//added by me
     [ForeignKey("SupplierId")]
     [InverseProperty("Products")]
     public virtual Supplier? Supplier { get; set; }

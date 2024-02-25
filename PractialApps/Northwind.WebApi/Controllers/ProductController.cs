@@ -27,6 +27,7 @@ public class ProductController : ControllerBase
     [HttpPost]
     public async Task AddProd(Product prod)
     {
-        await repo.AddProductAsync(prod);
+        var responseNumber =await repo.AddProductAsync(prod);
+        await Out.WriteLineAsync($"{nameof(responseNumber)} is: {responseNumber}");
     }
 }

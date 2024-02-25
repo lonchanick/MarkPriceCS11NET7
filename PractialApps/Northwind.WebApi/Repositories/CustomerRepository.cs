@@ -107,6 +107,9 @@ public class CustomerRepository : ICustomerRepository
         }
     }
 
+
+
+    #region Products Methods
     public async Task<IEnumerable<IEnumerable<int>>> SuppliersAndCategoriesAsync()
     {
         int[] suppliers = await db.Suppliers
@@ -133,8 +136,12 @@ public class CustomerRepository : ICustomerRepository
         return await db.Products.ToListAsync();
     }
 
-    public async Task AddProductAsync(Product prod)
+    public async Task<int> AddProductAsync(Product prod)
     {
         await db.Products.AddAsync(prod);
+        return await db.SaveChangesAsync();
     }
+
+    #endregion
+
 }
