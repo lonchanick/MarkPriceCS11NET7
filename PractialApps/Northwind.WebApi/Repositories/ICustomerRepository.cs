@@ -11,5 +11,6 @@ public interface ICustomerRepository
     Task<bool?> DeleteAsync(string id);
     Task<IEnumerable<IEnumerable<int>>> SuppliersAndCategoriesAsync();
     Task<IEnumerable<Product>> GetProductsAsync();
+    Task AddProductAsync(Product prod);
 
 }

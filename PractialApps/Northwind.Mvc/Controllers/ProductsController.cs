@@ -18,44 +18,38 @@ public class ProductsController : Controller
 
     public async Task<IActionResult> Index()
     {
-        ViewData["Title"] = "Controller: Product Method: Index";
-
-        Console.ForegroundColor = ConsoleColor.Red;
-        await Out.WriteLineAsync(">>>>>>>>>>>>>>>>>>>>>>>>>>   Products - index");
-        Console.ResetColor();
-
-        #region temp
-        //string uri = "/product";
-
-        //HttpClient client = clientFactory.CreateClient(
-        //        name: "Northwind.WebApi");
-
-        //HttpRequestMessage request = new(method: HttpMethod.Get, requestUri: uri);
-
-        //HttpResponseMessage response = await client.SendAsync(request);
-
-        //IEnumerable<Product>? products = await response.Content
-        //    .ReadFromJsonAsync<IEnumerable<Product>>(); 
-
-        //return View(products);
-        #endregion
+        ViewData["Title"] = "Products";
         
-        return View();
+        string uri = "/product";
+
+        HttpClient client = clientFactory.CreateClient(
+                name: "Northwind.WebApi");
+
+        HttpRequestMessage request = new(method: HttpMethod.Get, requestUri: uri);
+
+        HttpResponseMessage response = await client.SendAsync(request);
+
+        IEnumerable<Product>? products = await response.Content
+            .ReadFromJsonAsync<IEnumerable<Product>>();
+
+        return View(products);
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddProd([FromForm] SupplierAndCategory modelFromForm)
+    public async Task<IActionResult> AddProd(SupplierAndCategory modelFromForm)
     {
         ViewData["Title"] = "Add Product";
 
-        string uri = "/api/Customers";
+
+        await Out.WriteLineAsync("spot");
+        string uri = "/api/Product";
 
         HttpClient client = clientFactory.CreateClient(
                 name: "Northwind.WebApi");
 
         HttpRequestMessage request = new(method: HttpMethod.Post, requestUri: uri);
 
-        Product product = modelFromForm.product!;
+        Product product = modelFromForm.product;
 
         var productSerialized = new StringContent(
             JsonConvert.SerializeObject(product),
@@ -65,7 +59,9 @@ public class ProductsController : Controller
 
         HttpResponseMessage response = await client.PostAsync(uri, productSerialized);
 
-        return Ok("... ok by default ...");
+        //Index();
+
+        return Ok();
     }
 
 
@@ -79,13 +75,8 @@ public class ProductsController : Controller
                 name: "Northwind.WebApi");
 
         HttpRequestMessage request = new(method: HttpMethod.Get, requestUri: uri);
-        //HttpRequestMessage request = new(method: HttpMethod.Get, requestUri: uri);
 
         HttpResponseMessage response = await client.SendAsync(request);
-        //HttpResponseMessage response = await client.SendAsync(request);
-
-        //IEnumerable<Customer>? model = await response.Content
-        //    .ReadFromJsonAsync<IEnumerable<Customer>>();
 
         IEnumerable<IEnumerable<int>>? model = await response.Content
             .ReadFromJsonAsync<IEnumerable<IEnumerable<int>>>();
@@ -97,5 +88,6 @@ public class ProductsController : Controller
         };
 
         return View(supCat);
+
     }
 }

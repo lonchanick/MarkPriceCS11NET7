@@ -132,4 +132,9 @@ public class CustomerRepository : ICustomerRepository
         // For performance, get from cache.
         return await db.Products.ToListAsync();
     }
+
+    public async Task AddProductAsync(Product prod)
+    {
+        await db.Products.AddAsync(prod);
+    }
 }

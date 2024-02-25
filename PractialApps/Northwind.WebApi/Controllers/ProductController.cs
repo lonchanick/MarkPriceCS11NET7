@@ -23,4 +23,10 @@ public class ProductController : ControllerBase
         var products = await repo.GetProductsAsync();
         return products;
     }
+
+    [HttpPost]
+    public async Task AddProd(Product prod)
+    {
+        await repo.AddProductAsync(prod);
+    }
 }

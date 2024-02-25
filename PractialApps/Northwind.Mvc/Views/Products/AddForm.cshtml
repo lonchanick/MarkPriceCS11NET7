@@ -1,27 +1,21 @@
 ﻿@using Packt.Shared
 
-@model SupplierAndCategory
-@* @model IEnumerable<IEnumerable<int>> *@
+@* @model SupplierAndCategory *@
+ @model SupplierAndCategory
 
 <div class="container">
     <h1>Create Product</h1>
 
-    <form method="post" action="">
+    <form method="post" action="AddProd">
         <div class="mb-3">
-            <label asp-for="@Model.product.ProductName" class="form-label">Product Name</label>
-            <input asp-for="@Model.product.ProductName" class="form-control" />
-            <span asp-validation-for="@Model.product.ProductName" class="text-danger"></span>
+            <label asp-for="product.ProductName" class="form-label">Product Name</label>
+            <input asp-for="product.ProductName" class="form-control" />
+            <span asp-validation-for="product.ProductName" class="text-danger"></span>
         </div>
 
-        @* <div class="mb-3">
-            <label asp-for="@Model.product.SupplierId" class="form-label">ID Supplier</label>
-            <input asp-for="@Model.product.SupplierId" class="form-control" />
-            <span asp-validation-for="@Model.product.SupplierId" class="text-danger"></span>
-        </div> *@
-
         <div class="mb-3">
-            <label asp-for="@Model.product.SupplierId" class="form-label">ID Supplier</label>
-            <select asp-for="@Model.product.SupplierId" class="form-control">
+            <label asp-for="product.SupplierId" class="form-label">ID Supplier</label>
+            <select asp-for="product.SupplierId" class="form-control">
                 @foreach(var option in Model.SupAndCat.ElementAt(0))
                 {
                     <option value="@option">@option</option>
@@ -29,14 +23,9 @@
             </select>
         </div>
 
-        @* <div class="mb-3">
-            <label asp-for="@Model.product.CategoryId" class="form-label">Category Id</label>
-            <input asp-for="@Model.product.CategoryId" class="form-control" />
-            <span asp-validation-for="@Model.product.CategoryId" class="text-danger"></span>
-        </div> *@
         <div class="mb-3">
-            <label asp-for="@Model.product.CategoryId" class="form-label">Categy ID</label>
-            <select asp-for="@Model.product.CategoryId" class="form-control">
+            <label asp-for="product.CategoryId" class="form-label">Categy ID</label>
+            <select asp-for="product.CategoryId" class="form-control">
                 @foreach (var option in Model.SupAndCat.ElementAt(1))
                 {
                     <option value="@option">@option</option>
@@ -45,39 +34,39 @@
         </div>
 
         <div class="mb-3">
-            <label asp-for="@Model.product.QuantityPerUnit" class="form-label">Quantity Per Unit</label>
-            <input asp-for="@Model.product.QuantityPerUnit" class="form-control" />
-            <span asp-validation-for="@Model.product.QuantityPerUnit" class="text-danger"></span>
+            <label asp-for="product.QuantityPerUnit" class="form-label">Quantity Per Unit</label>
+            <input asp-for="product.QuantityPerUnit" class="form-control" />
+            <span asp-validation-for="product.QuantityPerUnit" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
-            <label asp-for="@Model.product.UnitPrice" class="form-label">Unit Price</label>
-            <input asp-for="@Model.product.UnitPrice" class="form-control" />
-            <span asp-validation-for="@Model.product.UnitPrice" class="text-danger"></span>
+            <label asp-for="product.UnitPrice" class="form-label">Unit Price</label>
+            <input asp-for="product.UnitPrice" class="form-control" />
+            <span asp-validation-for="product.UnitPrice" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
-            <label asp-for="@Model.product.UnitsInStock" class="form-label">Units In Stock</label>
-            <input asp-for="@Model.product.UnitsInStock" class="form-control" />
-            <span asp-validation-for="@Model.product.UnitsInStock" class="text-danger"></span>
+            <label asp-for="product.UnitsInStock" class="form-label">Units In Stock</label>
+            <input asp-for="product.UnitsInStock" class="form-control" />
+            <span asp-validation-for="product.UnitsInStock" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
-            <label asp-for="@Model.product.UnitsOnOrder" class="form-label">Units On Order</label>
-            <input asp-for="@Model.product.UnitsOnOrder" class="form-control" />
-            <span asp-validation-for="@Model.product.UnitsOnOrder" class="text-danger"></span>
+            <label asp-for="product.UnitsOnOrder" class="form-label">Units On Order</label>
+            <input asp-for="product.UnitsOnOrder" class="form-control" />
+            <span asp-validation-for="product.UnitsOnOrder" class="text-danger"></span>
         </div>
 
         <div class="mb-3">
-            <label asp-for="@Model.product.ReorderLevel" class="form-label">Reorder Level</label>
-            <input asp-for="@Model.product.ReorderLevel" class="form-control" />
-            <span asp-validation-for="@Model.product.ReorderLevel" class="text-danger"></span>
+            <label asp-for="product.ReorderLevel" class="form-label">Reorder Level</label>
+            <input asp-for="product.ReorderLevel" class="form-control" />
+            <span asp-validation-for="product.ReorderLevel" class="text-danger"></span>
         </div>
 
         <div class="mb-3 form-check">
-            <input asp-for="@Model.product.Discontinued" type="checkbox" class="form-check-input" />
-            <label class="form-check-label" asp-for="@Model.product.Discontinued">Discontinued</label>
-            <span asp-validation-for="@Model.product.Discontinued" class="text-danger"></span>
+            <input asp-for="product.Discontinued" type="checkbox" class="form-check-input" />
+            <label class="form-check-label" asp-for="product.Discontinued">Discontinued</label>
+            <span asp-validation-for="product.Discontinued" class="text-danger"></span>
         </div>
 
         <button type="submit" class="btn btn-primary">Create</button>
